@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1142  Introduction to Project Management and Career Strategy as a Product Manager in the AI Era — Term Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 使用更接近 SAP 標準的 Roboto 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // 替換為 SAP Fiori Horizon 色系
+                        brand: {
+                            navy:    '#12171c', // Fiori Dark Background
+                            blue:    '#005ca9', // Fiori Dark Blue
+                            accent:  '#0070f2', // Fiori Primary Blue
+                            light:   '#e5f0fa', // Fiori Hover State
+                            muted:   '#556b82', // Fiori Neutral Text
+                            surface: '#ffffff', // Fiori Surface
+                            border:  '#d9d9d9', // Fiori Border
+                            gold:    '#e9730c', // Fiori Warning/Gold
+                        }
+                    },
+        fontFamily: {
+            display: ['"Roboto"', '"Noto Sans TC"', 'Arial', 'sans-serif'],
+            body: ['"Roboto"', '"Noto Sans TC"', 'Arial', 'sans-serif'],
+                      }
+                }
+            }
+        };
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        html, body { height: 100%; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans TC', Arial, sans-serif;
+            background: #f4f5f6; /* Fiori 亮色背景 */
+            color: #32363a; /* Fiori 標準字色 */
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        body.dark {
+            background: #12171c; /* Fiori 暗色背景 */
+            color: #fafafa;
+        }
+
+        /* ---- Layout Shell ---- */
+        #app-header { flex: 0 0 auto; }
+        #app-main   { flex: 1 1 0; overflow-y: auto; }
+        #app-footer { flex: 0 0 auto; }
+
+        /* ---- Scrollbar styling ---- */
+        #app-main::-webkit-scrollbar { width: 8px; }
+        #app-main::-webkit-scrollbar-track { background: transparent; }
+        #app-main::-webkit-scrollbar-thumb { background: #89919a; border-radius: 4px; }
+        body.dark #app-main::-webkit-scrollbar-thumb { background: #556b82; }
+
+        /* ---- Typography ---- */
+        .font-display { font-family: 'Roboto', 'Noto Sans TC', Arial, sans-serif; }
+
+        /* ---- Sidebar ---- */
+        #sidebar {
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+        }
+        #sidebar-overlay {
+            transition: opacity 0.3s ease;
+        }
+
+        /* ---- Page sections ---- */
+        .page-section:not(.active) { display: none !important; }
+
+        /* ---- Fiori Cards Hover ---- */
+        .project-card {
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .project-card:hover { 
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15); 
+            transform: translateY(-2px);
+        }
+        body.dark .project-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.4); 
+        }
+
+        /* ---- Accent line under headings (Fiori styled) ---- */
+        .heading-accent::after {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 4px;
+            background: #0070f2;
+            margin-top: 12px;
+            border-radius: 2px;
+        }
+
+        /* ---- Tag pills ---- */
+        .tag { display: inline-flex; align-items: center; gap: 5px; }
+
+        /* ---- Dark overrides ---- */
+        body.dark .card-bg { background: #1d232a; border-color: #354250; box-shadow: 0 0 0.125rem rgba(0,0,0,0.4); }
+        body.dark .surface { background: #1d232a; }
+        body.dark .border-std { border-color: #354250; }
+        body.dark .muted-text { color: #89919a; }
+        body.dark .header-bg { background: #1d232a; border-color: #354250; box-shadow: 0 1px 0 rgba(0,0,0,0.5); }
+        body.dark .sidebar-bg { background: #1d232a; border-color: #354250; }
+        body.dark .footer-bg { background: #1d232a; border-color: #354250; }
+        body.dark .nav-btn:hover { background: #29313a; }
+
+        /* light equivalents */
+        .card-bg { background: #ffffff; border: 1px solid #d9d9d9; box-shadow: 0 0 0.125rem rgba(0,0,0,0.1); }
+        .surface { background: #ffffff; }
+        .border-std { border-color: #d9d9d9; }
+        .muted-text { color: #556b82; }
+        .header-bg { background: #ffffff; border-color: #d9d9d9; box-shadow: 0 1px 0 rgba(0,0,0,0.05); }
+        .sidebar-bg { background: #ffffff; border-color: #d9d9d9; }
+        .footer-bg { background: #ffffff; border-color: #d9d9d9; }
+        .nav-btn:hover { background: #e5f0fa; color: #0070f2; }
+
+        body.dark { --text-primary: #fafafa; --text-secondary: #89919a; }
+        :root { --text-primary: #32363a; --text-secondary: #556b82; }
+
+        /* ---- Flip Card ---- */
+        .flip-card {
+            perspective: 1200px;
+            min-height: 280px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* ---- Preview Modal ---- */
+        #preview-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        #preview-modal.open { display: flex; }
+        #preview-modal-inner {
+            background: #fff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        }
+        body.dark #preview-modal-inner { background: #1d232a; }
+        #preview-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid #d9d9d9;
+            flex-shrink: 0;
+        }
+        body.dark #preview-modal-header { border-color: #354250; }
+        #preview-iframe {
+            width: 100%;
+            flex: 1;
+            border: none;
+            min-height: 500px;
+            background: #f4f5f6;
+        }
+        #preview-modal-placeholder {
+            flex: 1;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 40px;
+        }
+
+        /* ---- Section Bottom Nav ---- */
+        .section-bottom-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #d9d9d9;
+            gap: 12px;
+        }
+        body.dark .section-bottom-nav { border-color: #354250; }
+        .section-bottom-nav .nav-spacer { flex: 1; }
+        .section-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid #d9d9d9;
+            background: #ffffff;
+            color: #32363a;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        body.dark .section-nav-btn { background: #1d232a; border-color: #354250; color: #fafafa; }
+        .section-nav-btn:hover { background: #e5f0fa; border-color: #0070f2; color: #0070f2; }
+        body.dark .section-nav-btn:hover { background: #29313a; border-color: #0070f2; color: #0070f2; }
+        .section-nav-btn.primary { background: #0070f2; border-color: #0070f2; color: #fff; }
+        .section-nav-btn.primary:hover { background: #005ca9; border-color: #005ca9; box-shadow: 0 4px 12px rgba(0,112,242,0.3); }
+
+        /* Copy protection */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .btn-accent {
+            background: #0070f2;
+            color: #ffffff;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .btn-accent:hover { background: #005ca9; box-shadow: 0 0.25rem 0.5rem rgba(0,112,242,0.3); }
+        body.dark .btn-accent { background: #2282f1; }
+        body.dark .btn-accent:hover { background: #0070f2; box-shadow: 0 0.25rem 0.5rem rgba(34,130,241,0.3); }
+
+        /* ---- Peer Grading Banner ---- */
+        .review-banner-bg {
+            background: linear-gradient(90deg, #e5f0fa 0%, #ffffff 10%);
+        }
+        body.dark .review-banner-bg {
+            background: linear-gradient(90deg, #1a2a3a 0%, #1d232a 10%);
+        }
+
+        /* ---- Brightness Control Panel ---- */
+        #brightness-panel {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        #brightness-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0070f2;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,112,242,0.35);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        #brightness-toggle:hover { background: #005ca9; }
+        #brightness-widget {
+            background: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 12px;
+            padding: 14px 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 200px;
+        }
+        body.dark #brightness-widget {
+            background: #1d232a;
+            border-color: #354250;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        #brightness-widget.open { display: flex; }
+        #brightness-widget label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #556b82;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #brightness-widget label span {
+            font-weight: 400;
+            font-size: 12px;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-primary);
+        }
+        #brightness-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(to right, #0070f2 var(--pct, 71%), #d9d9d9 var(--pct, 71%));
+            outline: none;
+            cursor: pointer;
+        }
+        #brightness-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0070f2;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        #brightness-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #0070f2;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        #brightness-reset {
+            font-size: 11px;
+            color: #0070f2;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            align-self: flex-end;
+            font-family: inherit;
+        }
+        #brightness-reset:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════════════ HEADER ══════════════ -->
+    <!-- Fiori Header 通常沒有模糊效果，呈現紮實的頂部外觀 -->
+    <header id="app-header" class="header-bg border-b border-std h-14 flex items-center justify-between px-4 sm:px-8 z-50">
+        <div class="flex items-center gap-3">
+            <button id="btn-hamburger" class="p-2 rounded-md hover:bg-brand-light transition" aria-label="Menu">
+                <svg class="w-5 h-5 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+            <button onclick="navigateTo('home')" class="flex items-center gap-2 group">
+                <img src="https://docs.google.com/drawings/d/e/2PACX-1vSabOwOhvXfrQwnLBsqvRS_77bYM34nBZF2b1Gr4nmGfMCh_RuaWwUmrGk6j_nPcaTTMpFcC3Qm8vCk/pub?w=960&h=720" alt="PMCS Logo" class="h-9 w-auto object-contain" style="max-width:120px;">
+                <span class="font-display font-semibold text-lg tracking-tight" style="color:var(--text-primary)" data-i18n="app-title">1142  Introduction to Project Management and Career Strategy as a Product Manager in the AI Era</span>
+            </button>
+        </div>
+
+        <div class="flex items-center gap-1 sm:gap-2">
+            <!-- Voice Guide -->
+            <button id="btn-voice" onclick="toggleVoiceGuide()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition muted-text nav-btn">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                </svg>
+                <span class="hidden sm:inline" data-i18n="btn-voice">Voice Guide</span>
+            </button>
+
+            <!-- Language Toggle -->
+            <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-md text-sm font-medium transition muted-text nav-btn" title="中文 / English">
+                <span id="lang-label">中文</span>
+            </button>
+
+            <!-- Dark Mode -->
+            <button onclick="toggleTheme()" class="p-2 rounded-md transition muted-text nav-btn" aria-label="Toggle Theme">
+                <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <svg id="icon-moon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ══════════════ SIDEBAR OVERLAY ══════════════ -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/40 z-30 hidden opacity-0" style="backdrop-filter:blur(2px);"></div>
+
+    <!-- ══════════════ SIDEBAR ══════════════ -->
+    <!-- Fiori Sidebar 的設計較為方正嚴謹 -->
+    <aside id="sidebar" class="sidebar-bg fixed top-0 left-0 w-64 h-full border-r border-std shadow-xl z-40 transform -translate-x-full pt-16 flex flex-col">
+        <div class="px-4 mt-4 mb-4">
+            <p class="text-[11px] font-bold uppercase tracking-wider muted-text px-2" data-i18n="nav-label">Navigation</p>
+        </div>
+        <nav class="flex-1 px-3 space-y-1">
+            <button onclick="navigateTo('home')" class="w-full flex items-center gap-3 px-3 py-2.5 text-left rounded-md nav-btn transition text-sm font-medium" style="color:var(--text-primary)">
+                <svg class="w-5 h-5 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <span data-i18n="nav-home">Home</span>
+            </button>
+            <button onclick="navigateTo('intro')" class="w-full flex items-center gap-3 px-3 py-2.5 text-left rounded-md nav-btn transition text-sm font-medium" style="color:var(--text-primary)">
+                <svg class="w-5 h-5 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span data-i18n="nav-intro">Course Intro</span>
+            </button>
+            <button onclick="navigateTo('team')" class="w-full flex items-center gap-3 px-3 py-2.5 text-left rounded-md nav-btn transition text-sm font-medium" style="color:var(--text-primary)">
+                <svg class="w-5 h-5 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <span data-i18n="nav-team">Course Team</span>
+            </button>
+            <button onclick="navigateTo('projects')" class="w-full flex items-center gap-3 px-3 py-2.5 text-left rounded-md nav-btn transition text-sm font-medium" style="color:var(--text-primary)">
+                <svg class="w-5 h-5 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                <span data-i18n="nav-tp">Term Projects</span>
+            </button>
+            <button onclick="navigateTo('review')" class="w-full flex items-center gap-3 px-3 py-2.5 text-left rounded-md nav-btn transition text-sm font-medium" style="color:var(--text-primary)">
+                <svg class="w-5 h-5 text-brand-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span data-i18n="nav-review">Peer Grading</span>
+            </button>
+        </nav>
+        <div class="p-4 border-t border-std text-xs muted-text text-center bg-transparent">
+            &copy; 2026 PMCS-EMI Course
+        </div>
+    </aside>
+
+    <!-- ══════════════ MAIN CONTENT (scrollable) ══════════════ -->
+    <main id="app-main" class="px-4 sm:px-8 py-8 max-w-7xl mx-auto w-full">
+
+        <!-- PAGE: Home -->
+        <section id="page-home" class="page-section active flex flex-col items-center justify-center min-h-[60vh] text-center">
+            <div class="mb-6">
+                <img src="https://docs.google.com/drawings/d/e/2PACX-1vSabOwOhvXfrQwnLBsqvRS_77bYM34nBZF2b1Gr4nmGfMCh_RuaWwUmrGk6j_nPcaTTMpFcC3Qm8vCk/pub?w=960&h=720" alt="PMCS Logo" class="h-24 w-auto object-contain mx-auto">
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-brand-light text-brand-accent text-[11px] font-bold tracking-wide uppercase mb-4">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent inline-block"></span>
+                Spring 2026
+            </div>
+            <h1 class="font-display text-3xl md:text-5xl font-bold mb-4 leading-tight" style="color:var(--text-primary)" data-i18n="home-welcome">
+                Welcome to 1142 Introduction to Project Management and Career Strategy as a Product Manager in the AI Era<br>TP Showcase
+            </h1>
+            <p class="text-base max-w-xl mx-auto mb-8 leading-relaxed muted-text" data-i18n="home-desc">
+                This website displays the final term projects created by students in the PMCS-EMI course. Click the top-left menu to explore our course and the outstanding works by students!
+            </p>
+            
+            <!-- Fiori Launchpad Tiles (首頁模組導航磚塊) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full max-w-5xl mx-auto text-left mt-2">
+                <!-- Course Intro Tile -->
+                <button onclick="navigateTo('intro')" class="card-bg rounded-lg p-5 flex flex-col items-start gap-3 project-card text-left transition w-full focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                    <div class="w-10 h-10 rounded bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-1">
+                        <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <h3 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="nav-intro">Course Intro</h3>
+                    <p class="text-xs muted-text leading-relaxed" data-i18n="home-tile-intro-desc">Learn about course objectives and core values.</p>
+                </button>
+
+                <!-- Course Team Tile -->
+                <button onclick="navigateTo('team')" class="card-bg rounded-lg p-5 flex flex-col items-start gap-3 project-card text-left transition w-full focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                    <div class="w-10 h-10 rounded bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-1">
+                        <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </div>
+                    <h3 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="nav-team">Course Team</h3>
+                    <p class="text-xs muted-text leading-relaxed" data-i18n="home-tile-team-desc">Meet the professor and teaching assistants.</p>
+                </button>
+
+                <!-- Term Projects Tile -->
+                <button onclick="navigateTo('projects')" class="card-bg rounded-lg p-5 flex flex-col items-start gap-3 project-card text-left transition w-full focus:outline-none focus:ring-2 focus:ring-brand-accent">
+                    <div class="w-10 h-10 rounded bg-green-50 dark:bg-green-900/30 flex items-center justify-center mb-1">
+                        <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                    <h3 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="nav-tp">Term Projects</h3>
+                    <p class="text-xs muted-text leading-relaxed" data-i18n="home-tile-tp-desc">Explore the final term projects by students.</p>
+                </button>
+
+                <!-- Peer Grading Tile -->
+                <button onclick="navigateTo('review')" class="card-bg rounded-lg p-5 flex flex-col items-start gap-3 project-card text-left transition w-full focus:outline-none focus:ring-2 focus:ring-brand-accent" style="border-left: 3px solid #0070f2;">
+                    <div class="w-10 h-10 rounded flex items-center justify-center mb-1" style="background:#e5f0fa;">
+                        <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="nav-review">Peer Grading</h3>
+                        <span class="text-[10px] font-bold px-1.5 py-0.5 rounded" style="background:#0070f2;color:#fff;">OPEN</span>
+                    </div>
+                    <p class="text-xs muted-text leading-relaxed" data-i18n="home-tile-review-desc">Submit your peer evaluation for each group.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE: Course Intro -->
+        <section id="page-intro" class="page-section">
+            <h2 class="font-display text-2xl font-bold mb-1 heading-accent" style="color:var(--text-primary)" data-i18n="intro-title">Course Introduction</h2>
+
+            <!-- Hero card with image + subtitle -->
+            <div class="mt-8 card-bg rounded-lg overflow-hidden mb-6">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-5/12 border-b md:border-b-0 md:border-r border-std">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team collaboration" class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="md:w-7/12 p-6 md:p-8 flex flex-col justify-center gap-4">
+                        <h3 class="font-display text-xl font-bold" style="color:var(--text-primary)" data-i18n="intro-subtitle">Cultivating Excellent Product Managers in the AI Era</h3>
+                        <p class="text-sm leading-relaxed muted-text" data-i18n="intro-overview">
+                            This course combines AI tools with an all-English (EMI) environment to cultivate product managers with practical skills for multinational corporations. Explore the three pillars that define our curriculum below.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag px-2 py-1 rounded bg-blue-50 text-blue-700 text-xs font-medium border border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800" data-i18n="tag-emi">EMI English-taught</span>
+                            <span class="tag px-2 py-1 rounded bg-amber-50 text-amber-700 text-xs font-medium border border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800" data-i18n="tag-ai">AI Applications &amp; Practices</span>
+                            <span class="tag px-2 py-1 rounded bg-green-50 text-green-700 text-xs font-medium border border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800" data-i18n="tag-pm">Project Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three pillar flip cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                <!-- Pillar 1: EMI — Flip Card -->
+                <div class="flip-card" style="min-height:220px;" onclick="this.classList.toggle('flipped')" title="Click to flip">
+                    <div class="flip-card-inner" style="min-height:220px;">
+                        <!-- FRONT -->
+                        <div class="flip-card-front card-bg rounded-lg p-6 flex flex-col gap-3" style="min-height:220px;">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                                    </svg>
+                                </div>
+                                <span class="tag px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800" data-i18n="tag-emi">EMI English-taught</span>
+                            </div>
+                            <h4 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="intro-emi-title">English as Medium of Instruction</h4>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#2563eb;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-hint">Click to learn more</span>
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back rounded-lg p-6 flex flex-col gap-3" style="min-height:220px;background:#eff6ff;border:1px solid #bfdbfe;">
+                            <div class="flex items-center gap-2 mb-1">
+                                <svg class="w-4 h-4 flex-shrink-0" style="color:#2563eb;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                                <span class="text-xs font-bold" style="color:#1d4ed8;" data-i18n="tag-emi">EMI English-taught</span>
+                            </div>
+                            <p class="text-sm leading-relaxed flex-1" style="color:#1e3a5f;" data-i18n="intro-emi-desc">
+                                The entire course is conducted in English (EMI), immersing students in a professional international environment. Lectures, discussions, group presentations, and all written deliverables are completed in English — preparing students for careers in global corporations where cross-cultural communication is essential.
+                            </p>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#2563eb;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-back-hint">Click to flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: AI — Flip Card -->
+                <div class="flip-card" style="min-height:220px;" onclick="this.classList.toggle('flipped')" title="Click to flip">
+                    <div class="flip-card-inner" style="min-height:220px;">
+                        <!-- FRONT -->
+                        <div class="flip-card-front card-bg rounded-lg p-6 flex flex-col gap-3" style="min-height:220px;">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <span class="tag px-2 py-0.5 rounded bg-amber-50 text-amber-700 text-xs font-bold border border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800" data-i18n="tag-ai">AI Applications &amp; Practices</span>
+                            </div>
+                            <h4 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="intro-ai-title">Integrating GenAI into the PM Workflow</h4>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#d97706;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-hint">Click to learn more</span>
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back rounded-lg p-6 flex flex-col gap-3" style="min-height:220px;background:#fffbeb;border:1px solid #fde68a;">
+                            <div class="flex items-center gap-2 mb-1">
+                                <svg class="w-4 h-4 flex-shrink-0" style="color:#d97706;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <span class="text-xs font-bold" style="color:#92400e;" data-i18n="tag-ai">AI Applications &amp; Practices</span>
+                            </div>
+                            <p class="text-sm leading-relaxed flex-1" style="color:#451a03;" data-i18n="intro-ai-desc">
+                                Students actively leverage GenAI tools, mind-mapping platforms (Coggle), and online learning resources (Coursera) throughout the course. The curriculum emphasises Problem-Based Learning (PBL) and Self-Directed Learning (SDL), guiding students to use AI as a practical co-pilot for research, ideation, and strategic decision-making.
+                            </p>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#d97706;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-back-hint">Click to flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Project Management — Flip Card -->
+                <div class="flip-card" style="min-height:220px;" onclick="this.classList.toggle('flipped')" title="Click to flip">
+                    <div class="flip-card-inner" style="min-height:220px;">
+                        <!-- FRONT -->
+                        <div class="flip-card-front card-bg rounded-lg p-6 flex flex-col gap-3" style="min-height:220px;">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded bg-green-50 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                    </svg>
+                                </div>
+                                <span class="tag px-2 py-0.5 rounded bg-green-50 text-green-700 text-xs font-bold border border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800" data-i18n="tag-pm">Project Management</span>
+                            </div>
+                            <h4 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="intro-pm-title">From Strategy to Execution</h4>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#16a34a;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-hint">Click to learn more</span>
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back rounded-lg p-6 flex flex-col gap-3" style="min-height:220px;background:#f0fdf4;border:1px solid #bbf7d0;">
+                            <div class="flex items-center gap-2 mb-1">
+                                <svg class="w-4 h-4 flex-shrink-0" style="color:#16a34a;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                                <span class="text-xs font-bold" style="color:#166534;" data-i18n="tag-pm">Project Management</span>
+                            </div>
+                            <p class="text-sm leading-relaxed flex-1" style="color:#14532d;" data-i18n="intro-pm-desc">
+                                Students learn to integrate project management tools — including Gantt charts, supply chain analysis, and channel strategy — to bring a product idea from concept to market. Through collaborative term projects, they develop career strategy thinking, cross-departmental coordination skills, and the ability to translate business goals into actionable product roadmaps.
+                            </p>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#16a34a;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-back-hint">Click to flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="section-bottom-nav">
+                <span class="nav-spacer"></span>
+                <button class="section-nav-btn primary" onclick="navigateTo('team')">
+                    <span data-i18n="nav-team">Course Team</span>
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE: Course Team -->
+        <section id="page-team" class="page-section">
+            <h2 class="font-display text-2xl font-bold mb-1 heading-accent" style="color:var(--text-primary)" data-i18n="team-title">Course Team</h2>
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <!-- Professor — Flip Card -->
+                <div class="flip-card" style="min-height:300px;" onclick="this.classList.toggle('flipped')" title="Click to flip">
+                    <div class="flip-card-inner" style="min-height:300px;">
+                        <!-- FRONT -->
+                        <div class="flip-card-front card-bg rounded-lg p-6 flex flex-col items-center gap-2" style="min-height:300px;">
+                            <div class="relative w-20 h-20 mb-2 flex-shrink-0">
+                                <img src="https://docs.google.com/drawings/d/e/2PACX-1vTqwyFT7oLgPTSI9cBSOxmxfquRweIMarYkMjolusIb8MvzNJrx2UGXkNeDm5QTs8dt7JXagQuzHMjm/pub?w=960&h=720" alt="Professor" class="w-full h-full rounded-full object-cover">
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-brand-accent rounded-full flex items-center justify-center border-2 border-white dark:border-[#1d232a]">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                            <h3 class="font-display text-lg font-bold mb-0" style="color:var(--text-primary)" data-i18n="prof-name">Prof. Lo</h3>
+                            <p class="text-brand-accent text-[11px] font-bold uppercase tracking-wider mb-1" data-i18n="prof-role">Instructor</p>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#0070f2;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-hint">Click to learn more</span>
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back rounded-lg p-6 flex flex-col items-center gap-3" style="min-height:300px;background:#eff6ff;border:1px solid #bfdbfe;">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 border-2 border-blue-200 mb-1">
+                                <svg class="w-6 h-6" style="color:#0070f2;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422A12.083 12.083 0 0121 13c0 6-9 11-9 11S3 19 3 13c0-.898.121-1.77.34-2.578L12 14z"/></svg>
+                            </div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <svg class="w-4 h-4 flex-shrink-0" style="color:#1d4ed8;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                <span class="text-xs font-bold" style="color:#1d4ed8;" data-i18n="prof-name">Prof. Shih-Min Lo</span>
+                            </div>
+                            <p class="text-sm leading-relaxed text-center flex-1" style="color:#1e3a5f;" data-i18n="prof-desc">Specialises in platform strategy, entrepreneurship, and leadership. Conducts EMI courses preparing students for global PM careers.</p>
+                            <a href="https://www.ibs.ncnu.edu.tw/index.php/faculty/tenured-professor/299-smlo"
+                               target="_blank" rel="noopener"
+                               onclick="event.stopPropagation()"
+                               class="flex items-center gap-2 px-4 py-2 rounded-md text-xs font-semibold mt-1"
+                               style="background:#0070f2;color:#fff;text-decoration:none;">
+                                <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                <span data-i18n="prof-profile-btn">View Faculty Profile</span>
+                            </a>
+                            <div class="flex items-center gap-1.5 mt-1" style="color:#2563eb;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-back-hint">Click to flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TA 1 — Flip Card -->
+                <div class="flip-card" style="min-height:300px;" onclick="this.classList.toggle('flipped')" title="Click to flip">
+                    <div class="flip-card-inner" style="min-height:300px;">
+                        <!-- FRONT -->
+                        <div class="flip-card-front card-bg rounded-lg p-6 flex flex-col items-center gap-2" style="min-height:300px;">
+                            <div class="relative w-20 h-20 mb-2 flex-shrink-0">
+                                <img src="https://docs.google.com/drawings/d/e/2PACX-1vQiVGRNgpOpKi7UxFr3tynThtAgikD0f3iRlgBoB-fK_fX-DQbt8SzZCZwsfVwi1fSHJDY5U6yv_p_D/pub?w=960&h=720" alt="TA Jeremy" class="w-full h-full rounded-full object-cover">
+                            </div>
+                            <h3 class="font-display text-lg font-bold mb-0" style="color:var(--text-primary)" data-i18n="ta1-name">TA Jeremy Wang</h3>
+                            <p class="text-brand-muted text-[11px] font-bold uppercase tracking-wider mb-1" data-i18n="ta-role">Teaching Assistant</p>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#556b82;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-hint">Click to learn more</span>
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back rounded-lg p-6 flex flex-col gap-3" style="min-height:300px;background:#f8fafc;border:1px solid #cbd5e1;">
+                            <div class="flex items-center gap-2 mb-1">
+                                <svg class="w-4 h-4 flex-shrink-0" style="color:#475569;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                <span class="text-xs font-bold" style="color:#334155;" data-i18n="ta1-name">TA Jeremy Wang</span>
+                            </div>
+                            <p class="text-sm leading-relaxed flex-1" style="color:#1e293b;" data-i18n="ta1-desc">1. Former President of College of Management Student<br> 2. Association Teaching Assistant for Prof. Shih-Min Lo (English-taught PM &amp; Strategy courses)<br> 3. Farmer at Nanping Mountain Organic Farm－Internship<br>4. Be going to study in France~</p>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#475569;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-back-hint">Click to flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TA 2 — Flip Card -->
+                <div class="flip-card" style="min-height:300px;" onclick="this.classList.toggle('flipped')" title="Click to flip">
+                    <div class="flip-card-inner" style="min-height:300px;">
+                        <!-- FRONT -->
+                        <div class="flip-card-front card-bg rounded-lg p-6 flex flex-col items-center gap-2" style="min-height:300px;">
+                            <div class="relative w-20 h-20 mb-2 flex-shrink-0">
+                                <img src="https://docs.google.com/drawings/d/e/2PACX-1vT3GowRFbpQUPiAfEfESNVYxIc4VowV3C2anBriUAbb69nVU_G2Z9m6JguwOai16wa6FH7SXicYz2QA/pub?w=960&h=720" alt="TA Zoe" class="w-full h-full rounded-full object-cover">
+                            </div>
+                            <h3 class="font-display text-lg font-bold mb-0" style="color:var(--text-primary)" data-i18n="ta2-name">TA Zoe Chuang</h3>
+                            <p class="text-brand-muted text-[11px] font-bold uppercase tracking-wider mb-1" data-i18n="ta-role">Teaching Assistant</p>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#556b82;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-hint">Click to learn more</span>
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="flip-card-back rounded-lg p-6 flex flex-col gap-3" style="min-height:300px;background:#f8fafc;border:1px solid #cbd5e1;">
+                            <div class="flex items-center gap-2 mb-1">
+                                <svg class="w-4 h-4 flex-shrink-0" style="color:#475569;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                <span class="text-xs font-bold" style="color:#334155;" data-i18n="ta2-name">TA Zoe Chuang</span>
+                            </div>
+                            <p class="text-sm leading-relaxed flex-1" style="color:#1e293b;" data-i18n="ta2-desc">Assists students in solving problems.</p>
+                            <div class="flex items-center gap-1.5 mt-auto" style="color:#475569;">
+                                <svg style="width:13px;height:13px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                <span class="text-xs font-semibold" data-i18n="flip-back-hint">Click to flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="section-bottom-nav">
+                <button class="section-nav-btn" onclick="navigateTo('intro')">
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span data-i18n="nav-intro">Course Intro</span>
+                </button>
+                <button class="section-nav-btn primary" onclick="navigateTo('projects')">
+                    <span data-i18n="nav-tp">Term Projects</span>
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE: Term Projects -->
+        <section id="page-projects" class="page-section">
+            <h2 class="font-display text-2xl font-bold mb-1 heading-accent" style="color:var(--text-primary)" data-i18n="tp-title">Term Projects</h2>
+            <!-- Full-bleed grid: negative margins cancel the parent px-4/px-8 padding -->
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-0" style="margin-left:calc(-1rem);margin-right:calc(-1rem);">
+
+                <!-- Project 1 -->
+                <div class="project-card card-bg overflow-hidden flex flex-col" style="border-radius:0;border:none;border-right:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="EcoShop" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-2 py-0.5 bg-white/95 text-brand-navy text-[11px] font-bold rounded shadow-sm border border-gray-200">Group 1</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-base font-bold mb-2" style="color:var(--text-primary)" data-i18n="proj1-title">EcoShop E-Commerce</h3>
+                        <p class="text-sm leading-relaxed muted-text flex-1 mb-4" data-i18n="proj1-desc">An e-commerce simulation focused on eco-friendly products. Implemented dynamic product filtering, cart, and RWD checkout forms.</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent" onclick="openPreview('Group 1 — EcoShop', null)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                                <span data-i18n="btn-preview">Preview</span>
+                            </button>
+                            <button class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent">
+                                <span data-i18n="btn-view">View Website</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card card-bg overflow-hidden flex flex-col" style="border-radius:0;border:none;border-bottom:1px solid #d9d9d9;">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.1111.com.tw/11media/upload/1673332227.jpg" alt="MedFirst" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-2 py-0.5 bg-white/95 text-brand-navy text-[11px] font-bold rounded shadow-sm border border-gray-200">Group 2</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-base font-bold mb-2" style="color:var(--text-primary)" data-i18n="proj2-title">MedFirst Healthcare</h3>
+                        <p class="text-sm leading-relaxed muted-text flex-1 mb-4" data-i18n="proj2-desc">Allows users to input data via forms to instantly generate a beautiful, RWD personal portfolio. Uses highly modular CSS.</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent" onclick="openPreviewBlocked('Group 2 — MedFirst', 'https://medfirst.page.gd/')">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                                <span data-i18n="btn-preview">Preview</span>
+                            </button>
+                            <a href="https://medfirst.page.gd/" target="_blank" class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent">
+                                <span data-i18n="btn-view">View Website</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card card-bg overflow-hidden flex flex-col" style="border-radius:0;border:none;border-right:1px solid #d9d9d9;">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://i.pinimg.com/736x/7d/a9/e3/7da9e3562c7f2605826b76724f9b3cfd.jpg" alt="WebArcade" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-2 py-0.5 bg-white/95 text-brand-navy text-[11px] font-bold rounded shadow-sm border border-gray-200">Group 3</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-base font-bold mb-2" style="color:var(--text-primary)" data-i18n="proj3-title">WebArcade</h3>
+                        <p class="text-sm leading-relaxed muted-text flex-1 mb-4" data-i18n="proj3-desc">A classic mini-game collection built with vanilla JS (Snake, Breakout), showcasing strong DOM manipulation and animation skills.</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent" onclick="openPreview('Group 3 — WebArcade', null)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                                <span data-i18n="btn-preview">Preview</span>
+                            </button>
+                            <button class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent">
+                                <span data-i18n="btn-view">View Website</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card card-bg overflow-hidden flex flex-col" style="border-radius:0;border:none;">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://docs.google.com/drawings/d/e/2PACX-1vQjQuGMucmBLHpswGTzaHQxUDoueLNuR3sUcDd5WufUBjr4OZVhLEXBZPalVoeJ8_Nowzf17OBqqNJH/pub?w=960&h=720" alt="H&M" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-2 py-0.5 bg-white/95 text-brand-navy text-[11px] font-bold rounded shadow-sm border border-gray-200">Group 4</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-base font-bold mb-2" style="color:var(--text-primary)" data-i18n="proj4-title">Group 4 H&amp;M</h3>
+                        <p class="text-sm leading-relaxed muted-text flex-1 mb-4" data-i18n="proj4-desc">A classic mini-game collection built with vanilla JS (Snake, Breakout), showcasing strong DOM manipulation and animation skills.</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent" onclick="openPreview('Group 4 — H&amp;M', 'https://zoe-113251013.github.io/1142-PMCS-G4-TP/')">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                                <span data-i18n="btn-preview">Preview</span>
+                            </button>
+                            <a href="https://zoe-113251013.github.io/1142-PMCS-G4-TP/" target="_blank" class="flex-1 py-2 rounded-md text-sm font-medium border border-std transition nav-btn flex items-center justify-center gap-2 muted-text hover:text-brand-accent">
+                                <span data-i18n="btn-view">View Website</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="section-bottom-nav">
+                <button class="section-nav-btn" onclick="navigateTo('team')">
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span data-i18n="nav-team">Course Team</span>
+                </button>
+                <button class="section-nav-btn primary" onclick="navigateTo('review')">
+                    <span data-i18n="nav-review">Peer Grading</span>
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE: Peer Grading -->
+        <section id="page-review" class="page-section">
+            <h2 class="font-display text-2xl font-bold mb-1 heading-accent" style="color:var(--text-primary)" data-i18n="review-title">Peer Grading</h2>
+            <div class="mt-8 card-bg rounded-lg overflow-hidden">
+
+                <!-- Header banner -->
+                <div class="flex items-center gap-4 p-5 border-b border-std review-banner-bg">
+                    <div class="w-10 h-10 rounded bg-brand-accent flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                        <p class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="review-banner-title">Group Peer Evaluation Form</p>
+                        <p class="text-xs muted-text" data-i18n="review-banner-sub">Please complete the form for each group you reviewed. Your feedback is anonymous.</p>
+                    </div>
+                </div>
+
+                <!-- Placeholder / iframe area — replace inner div with <iframe> once URL is ready -->
+                <div id="review-iframe-wrap" class="w-full flex flex-col items-center justify-center py-20 gap-4" style="min-height:420px;">
+                    <svg class="w-14 h-14 opacity-20" style="color:#0070f2;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <p class="font-display font-semibold text-base muted-text" data-i18n="review-pending-title">Form URL Coming Soon</p>
+                    <p class="text-sm muted-text max-w-xs text-center" data-i18n="review-pending-desc">The peer grading form will be embedded here once the link is available. Please check back later.</p>
+                    <!-- Shown automatically once REVIEW_FORM_URL is set in the script below -->
+                    <a id="btn-open-form" href="#" target="_blank" class="btn-accent px-6 py-2 rounded-md text-sm font-semibold hidden" data-i18n="review-open-btn">Open Form</a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="section-bottom-nav">
+                <button class="section-nav-btn" onclick="navigateTo('projects')">
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span data-i18n="nav-tp">Term Projects</span>
+                </button>
+                <span class="nav-spacer"></span>
+            </div>
+        </section>
+    </main>
+
+    <!-- ══════════════ FOOTER (fixed) ══════════════ -->
+    <footer id="app-footer" class="footer-bg border-t border-std py-3 px-6 sm:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs muted-text">
+            <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <span data-i18n="footer-copyright">&copy; 2026 PMCS TP Final.</span>
+                <span class="hidden sm:inline opacity-30">|</span>
+                <a href="https://www.ibs.ncnu.edu.tw/index.php/faculty/tenured-professor/299-smlo" target="_blank" rel="noopener" data-i18n="footer-prof" class="hover:text-brand-accent transition" style="text-decoration:none;">Instructor: Prof. Shihmin Lo</a>
+                <span class="hidden sm:inline opacity-30">|</span>
+                <span data-i18n="footer-disclaimer">For academic purposes only.</span>
+            </div>
+            <div class="flex items-center gap-5 font-medium">
+                <button onclick="openModal('privacy')" class="hover:text-brand-accent transition" data-i18n="footer-privacy">Privacy</button>
+                <button onclick="openModal('terms')"   class="hover:text-brand-accent transition" data-i18n="footer-terms">Terms</button>
+                <button onclick="openModal('contact')" class="hover:text-brand-accent transition" data-i18n="footer-contact">Contact</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══════════════ PROJECT PREVIEW MODAL ══════════════ -->
+    <div id="preview-modal" onclick="if(event.target===this)closePreview()">
+        <div id="preview-modal-inner">
+            <div id="preview-modal-header">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded flex items-center justify-center flex-shrink-0" style="background:#e5f0fa;">
+                        <svg style="width:18px;height:18px;color:#0070f2;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                    </div>
+                    <span id="preview-modal-title" class="font-display font-bold text-base" style="color:var(--text-primary);">Project Preview</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a id="preview-open-link" href="#" target="_blank" rel="noopener" class="btn-accent px-4 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 hidden" style="text-decoration:none;">
+                        <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        <span data-i18n="btn-view">View Website</span>
+                    </a>
+                    <button onclick="closePreview()" class="p-1.5 rounded-md muted-text nav-btn transition">
+                        <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- iframe (populated by JS) -->
+            <iframe id="preview-iframe" title="Project Preview" style="display:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+            <!-- placeholder when no URL -->
+            <div id="preview-modal-placeholder">
+                <svg style="width:56px;height:56px;color:#0070f2;opacity:0.3;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                <p class="font-display font-semibold text-base" style="color:var(--text-primary);" data-i18n="preview-no-url-title">Website URL Not Available</p>
+                <p class="text-sm muted-text text-center max-w-xs" data-i18n="preview-no-url-desc">This group's website URL hasn't been added yet. Check back later or contact the course team.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ MODALS ══════════════ -->
+
+    <!-- Shared backdrop -->
+    <div id="modal-backdrop" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" style="background:rgba(0,0,0,0.5);backdrop-filter:blur(3px);">
+
+        <!-- ── Privacy Policy Modal ── -->
+        <div id="modal-privacy" class="modal-panel card-bg rounded-lg shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-std flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h2 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="privacy-title">Privacy Policy</h2>
+                </div>
+                <button onclick="closeModal()" class="p-1.5 rounded-md nav-btn muted-text transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="overflow-y-auto px-6 py-5 text-sm leading-relaxed muted-text space-y-4 flex-1">
+                <p class="text-xs muted-text" data-i18n="privacy-date">Last updated: May 2026</p>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="privacy-s1-title">1. Information We Collect</h3>
+                    <p data-i18n="privacy-s1-body">This website does not collect any personally identifiable information. No login, registration, or personal data submission is required to browse this site. If you use the Voice Guide feature, audio processing occurs entirely within your browser and no data is transmitted to any server.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="privacy-s2-title">2. Cookies &amp; Local Storage</h3>
+                    <p data-i18n="privacy-s2-body">We use browser localStorage solely to remember your display preferences (light/dark theme). No tracking cookies or third-party analytics are used on this site.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="privacy-s3-title">3. Third-Party Services</h3>
+                    <p data-i18n="privacy-s3-body">This site embeds images from Unsplash and Google Drawings, and loads fonts from Google Fonts. These services may log your IP address per their own privacy policies. The Peer Grading form is hosted by Google Forms — please refer to Google's Privacy Policy for details on how submitted data is handled.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="privacy-s4-title">4. Academic Use</h3>
+                    <p data-i18n="privacy-s4-body">This website is created as a student term project for the 1142 PMCS course at a university. It is intended solely for academic demonstration purposes and is not operated as a commercial service.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="privacy-s5-title">5. Contact</h3>
+                    <p data-i18n="privacy-s5-body">If you have any questions about this privacy policy, please reach out via the Contact form on this website.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Terms of Use Modal ── -->
+        <div id="modal-terms" class="modal-panel card-bg rounded-lg shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-std flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-green-50 dark:bg-green-900/30 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    </div>
+                    <h2 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="terms-title">Terms of Use</h2>
+                </div>
+                <button onclick="closeModal()" class="p-1.5 rounded-md nav-btn muted-text transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="overflow-y-auto px-6 py-5 text-sm leading-relaxed muted-text space-y-4 flex-1">
+                <p class="text-xs muted-text" data-i18n="terms-date">Last updated: May 2026</p>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="terms-s1-title">1. Acceptance of Terms</h3>
+                    <p data-i18n="terms-s1-body">By accessing this website, you agree to be bound by these Terms of Use. If you do not agree, please discontinue use of this site. These terms apply to all visitors and users of the 1142 PMCS Term Project Showcase.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="terms-s2-title">2. Academic Purpose</h3>
+                    <p data-i18n="terms-s2-body">This website is published exclusively for academic and educational demonstration. All content — including project descriptions, team profiles, and course materials — is produced by students and course staff of the 1142 PMCS course. It is not intended for commercial use.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="terms-s3-title">3. Intellectual Property</h3>
+                    <p data-i18n="terms-s3-body">All student project works, logos, and course materials displayed on this site are the intellectual property of their respective authors. Reproduction, distribution, or commercial use of any content without prior written consent is prohibited.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="terms-s4-title">4. Disclaimer of Warranties</h3>
+                    <p data-i18n="terms-s4-body">This site is provided "as is" without warranties of any kind. We make no guarantees regarding the accuracy, completeness, or availability of the content. Project links to external student websites are maintained by the respective teams and may change or become unavailable.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-1" style="color:var(--text-primary)" data-i18n="terms-s5-title">5. Modifications</h3>
+                    <p data-i18n="terms-s5-body">We reserve the right to update these terms at any time. Continued use of the site following any changes constitutes your acceptance of the revised terms.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Contact Modal ── -->
+        <div id="modal-contact" class="modal-panel card-bg rounded-lg shadow-2xl w-full max-w-lg flex flex-col hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-std flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h2 class="font-display font-bold text-base" style="color:var(--text-primary)" data-i18n="contact-title">Contact Us</h2>
+                </div>
+                <button onclick="closeModal()" class="p-1.5 rounded-md nav-btn muted-text transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="px-6 py-5 space-y-4">
+                <!-- Contact info cards -->
+                <div class="grid grid-cols-1 gap-3 mb-2">
+                    <div class="rounded-lg p-3 flex items-start gap-3" style="background:#f4f5f6;border:1px solid #d9d9d9;">
+                        <svg class="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <div class="w-full">
+                            <p class="text-xs font-semibold mb-2" style="color:var(--text-primary)" data-i18n="contact-ta-label">Teaching Assistants</p>
+                            <div class="space-y-1.5">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5">
+                                    <p class="text-xs font-medium muted-text" data-i18n="contact-ta1-name">TA Zoe Chuang</p>
+                                    <a href="mailto:s113251013@mail1.ncnu.edu.tw" class="text-xs text-brand-accent hover:underline transition">s113251013@mail1.ncnu.edu.tw</a>
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5">
+                                    <p class="text-xs font-medium muted-text " data-i18n="contact-ta2-name">TA Jeremy Wang</p>
+                                    <a href="mailto:s112251011@mail1.ncnu.edu.tw" class="text-xs text-brand-accent hover:underline transition">s112251011@mail1.ncnu.edu.tw</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Message form -->
+                <p class="text-xs font-semibold uppercase tracking-wider muted-text" data-i18n="contact-form-label">Send a Message</p>
+                <div id="contact-form-area" class="space-y-3">
+                    <input id="contact-name" type="text" placeholder="Your Name" data-i18n-placeholder="contact-placeholder-name"
+                        class="w-full px-3 py-2 text-sm rounded-md border border-std bg-transparent focus:outline-none focus:border-brand-accent transition"
+                        style="color:var(--text-primary);">
+                    <input id="contact-email" type="email" placeholder="Your Email" data-i18n-placeholder="contact-placeholder-email"
+                        class="w-full px-3 py-2 text-sm rounded-md border border-std bg-transparent focus:outline-none focus:border-brand-accent transition"
+                        style="color:var(--text-primary);">
+                    <textarea id="contact-message" rows="3" placeholder="Your Message" data-i18n-placeholder="contact-placeholder-msg"
+                        class="w-full px-3 py-2 text-sm rounded-md border border-std bg-transparent focus:outline-none focus:border-brand-accent transition resize-none"
+                        style="color:var(--text-primary);"></textarea>
+                    <button onclick="submitContact()" class="btn-accent w-full py-2 rounded-md text-sm font-semibold flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                        <span data-i18n="contact-send">Send Message</span>
+                    </button>
+                </div>
+                <!-- Success state (hidden until submit) -->
+                <div id="contact-success" class="hidden text-center py-6 space-y-2">
+                    <svg class="w-10 h-10 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p class="font-semibold text-sm" style="color:var(--text-primary)" data-i18n="contact-success-title">Message Sent!</p>
+                    <p class="text-xs muted-text" data-i18n="contact-success-desc">Thank you for reaching out. We'll get back to you as soon as possible.</p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end modal-backdrop -->
+
+    <!-- ══════════════ JAVASCRIPT ══════════════ -->
+    <script>
+        // ── Modals ──
+        function openModal(id) {
+            document.querySelectorAll('.modal-panel').forEach(m => m.classList.add('hidden'));
+            document.getElementById('modal-' + id).classList.remove('hidden');
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+            document.querySelectorAll('.modal-panel').forEach(m => m.classList.add('hidden'));
+            document.body.style.overflow = '';
+        }
+        document.getElementById('modal-backdrop').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function submitContact() {
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const msg  = document.getElementById('contact-message').value.trim();
+            if (!name || !email || !msg) {
+                alert(currentLang === 'zh' ? '請填寫所有欄位。' : 'Please fill in all fields.');
+                return;
+            }
+            const to = 's113251013@mail1.ncnu.edu.tw,s112251011@mail1.ncnu.edu.tw';
+            const subject = encodeURIComponent(`[1142 PMCS] Message from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+            window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+            // Show success state
+            document.getElementById('contact-form-area').classList.add('hidden');
+            document.getElementById('contact-success').classList.remove('hidden');
+        }
+
+        // ── Sidebar ──
+        const btnHamburger = document.getElementById('btn-hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const pages = document.querySelectorAll('.page-section');
+        let currentActivePage = 'home';
+
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function navigateTo(pageId) {
+            pages.forEach(p => { p.classList.remove('active'); });
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+                currentActivePage = pageId;
+                document.getElementById('app-main').scrollTo({ top: 0, behavior: 'smooth' });
+                if (!sidebar.classList.contains('-translate-x-full')) toggleSidebar();
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        btnHamburger.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // ── Project Preview Modal ──
+        function openPreview(title, url) {
+            document.getElementById('preview-modal-title').textContent = title;
+            const iframe = document.getElementById('preview-iframe');
+            const placeholder = document.getElementById('preview-modal-placeholder');
+            const openLink = document.getElementById('preview-open-link');
+            if (url) {
+                iframe.src = url;
+                iframe.style.display = 'block';
+                placeholder.style.display = 'none';
+                openLink.href = url;
+                openLink.classList.remove('hidden');
+            } else {
+                iframe.src = '';
+                iframe.style.display = 'none';
+                placeholder.style.display = 'flex';
+                openLink.classList.add('hidden');
+            }
+            // Temporarily remove brightness filters from layout regions so they
+            // don't create stacking contexts that would clip the fixed modal
+            ['app-header','app-main','app-footer'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.dataset.savedFilter = el.style.filter || '';
+                if (el) el.style.filter = '';
+            });
+            document.getElementById('preview-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function openPreviewBlocked(title, url) {
+            document.getElementById('preview-modal-title').textContent = title;
+            const iframe = document.getElementById('preview-iframe');
+            const placeholder = document.getElementById('preview-modal-placeholder');
+            const openLink = document.getElementById('preview-open-link');
+            iframe.src = '';
+            iframe.style.display = 'none';
+            placeholder.style.display = 'flex';
+            placeholder.innerHTML = `
+                <svg style="width:52px;height:52px;opacity:0.25;color:#0070f2;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                <p style="font-weight:600;font-size:1rem;margin-top:12px;color:var(--text-primary);">Preview Not Available</p>
+                <p style="font-size:0.85rem;color:#556b82;max-width:300px;text-align:center;margin-bottom:8px;">This site does not allow embedding. Please open it directly in a new tab.</p>
+                <a href="${url}" target="_blank" rel="noopener"
+                   style="margin-top:8px;padding:10px 28px;background:#0070f2;color:#fff;border-radius:6px;font-size:0.875rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+                    <svg style="width:15px;height:15px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    Open Website
+                </a>
+            `;
+            openLink.classList.add('hidden');
+            ['app-header','app-main','app-footer'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.dataset.savedFilter = el.style.filter || '';
+                if (el) el.style.filter = '';
+            });
+            document.getElementById('preview-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePreview() {
+            document.getElementById('preview-modal').classList.remove('open');
+            document.getElementById('preview-iframe').src = '';
+            document.body.style.overflow = '';
+            // Restore brightness filters
+            ['app-header','app-main','app-footer'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el && el.dataset.savedFilter !== undefined) {
+                    el.style.filter = el.dataset.savedFilter;
+                }
+            });
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('preview-modal').classList.contains('open')) {
+                closePreview();
+            }
+        });
+
+        // ── i18n ──
+        let currentLang = 'en'; // Default: English
+
+        const i18nDict = {
+            'zh': {
+                'app-title': '1142 PMCS',
+                'nav-label': '導覽',
+                'nav-home': '首頁',
+                'nav-intro': '課程介紹',
+                'nav-team': '課程團隊',
+                'nav-tp': '小組TP清單',
+                'nav-review': '同儕評審',
+                'btn-voice': '語音導覽',
+                'home-welcome': '1142 AI世代產品經理職涯策略與專案管理導論 <br> TP 網頁成果展',
+                'home-desc': '本網站展示了學生們在網頁設計課程中的最終專案成果 (Term Projects)。請點擊左上方選單開始探索我們的課程與學生們的傑出作品！',
+                'btn-start': '開始探索作品',
+                'home-tile-intro-desc': '了解課程目標與核心理念。',
+                'home-tile-team-desc': '認識授課教授與助教團隊。',
+                'home-tile-tp-desc': '探索學生們的期末專案作品。',
+                'home-tile-review-desc': '提交您對每組的同儕評量。',
+                'intro-title': '課程介紹',
+                'intro-subtitle': '培育 AI 世代的卓越產品經理',
+                'intro-overview': '本課程結合 AI 工具與全英語（EMI）環境，旨在培育具備實務能力的跨國企業產品經理。以下三大核心支柱定義了本課程的學習架構。',
+                'intro-emi-title': '英語授課（EMI）',
+                'intro-emi-desc': '整門課程採全英語授課（EMI），將學生沉浸於專業的國際化環境中。課堂討論、小組報告與書面作業均以英語完成，為學生在全球企業中進行跨文化溝通做好準備。',
+                'intro-ai-title': '整合 GenAI 於產品管理工作流程',
+                'intro-ai-desc': '學生在整個課程中積極運用 GenAI 工具、心智圖平台（Coggle）及線上學習資源（Coursera）。課程強調問題導向學習（PBL）與自主學習（SDL），引導學生將 AI 作為研究、創意發想與策略決策的實務協作夥伴。',
+                'intro-pm-title': '從策略到執行',
+                'intro-pm-desc': '學生學習整合專案管理工具（包括甘特圖、供應鏈分析與通路策略），將產品創意從概念推向市場。透過協作式期末專案，培養職涯策略思維、跨部門協調能力，以及將商業目標轉化為可行產品藍圖的能力。',
+                'review-title': '同儕評審',
+                'review-banner-title': '小組同儕評量表',
+                'review-banner-sub': '請針對您所評審的每個小組完成此表單。您的回饋將保持匿名。',
+                'review-pending-title': '表單連結即將公布',
+                'review-pending-desc': '同儕評審表單連結公布後將嵌入於此，請稍後再查看。',
+                'review-open-btn': '開啟表單',
+                'review-ready-title': '同儕評審表單已就緒',
+                'review-ready-desc': '請點擊下方按鈕以在新分頁開啟表單。每個您評審的小組請各填寫一次。',
+                'review-anon-note': '🔒 您的回覆匿名且僅供學術使用。',
+                'tag-emi': 'EMI全英授課',
+                'tag-ai': 'AI應用與實踐',
+                'tag-pm': '專案管理',
+                'team-title': '課程團隊',
+                'prof-name': '駱世民教授',
+                'prof-role': '授課教師',
+                'prof-desc': '研究領域－國際企業經營策略、產業與競爭分析、創新與創業管理、平台商業模式、市場溝通與品牌策略等。',
+                'ta1-name': '助教王毓翰',
+                'ta-role': '課程助教',
+                'ta1-desc': '1.管理學院學士班前系學會長<br> 2. 國際企業學系駱世民教授課程教學助理（全英授課，產品經理與策略管理相關課程）<br> 3. 南平山道田有機生態農場－實習中<br> 4.準備前往法國留學～',
+                'ta2-name': '助教莊詠捷',
+                'ta2-desc': '我是管院學士班(IPCM)大二的學生，本學期負責協助同學解決課堂問題，其餘不想過多介紹，可以跟我當朋友我再告訴你。',
+                'tp-title': '小組期末專案',
+                'proj1-title': '第一組 EcoShop 綠色電商',
+                'proj1-desc': '一個專注於環保商品的模擬電子商務網站。實作了動態商品過濾、購物車功能與響應式結帳表單設計。',
+                'proj2-title': '第二組 杏一藥局',
+                'proj2-desc': '提供使用者透過表單輸入資料，即時產生精美且具備 RWD 的個人網頁作品集。採用高度模組化的 CSS 設計。',
+                'proj3-title': '第三組 WebArcade',
+                'proj3-desc': '純 JavaScript 打造的經典小遊戲合集（貪吃蛇、打磚塊），展現了強大的 DOM 操作與 RequestAnimationFrame 動畫控制能力。',
+                'proj4-title': '第四組 H&M',
+                'proj4-desc': '打破時尚的昂貴特權，H&M 用最親民的價格，讓全球最前沿的潮流成為你觸手可及的日常。',
+                'btn-view': '查看網站',
+                'footer-copyright': '© 2026 PMCS TP Final.',
+                'footer-prof': '指導教授：駱世民教授',
+                'footer-disclaimer': '本網站僅供學術作業使用。',
+                'footer-privacy': '隱私政策',
+                'footer-terms': '使用條款',
+                'footer-contact': '聯絡我們',
+                'privacy-title': '隱私權政策',
+                'privacy-date': '最後更新：2026 年 5 月',
+                'privacy-s1-title': '1. 我們蒐集的資訊',
+                'privacy-s1-body': '本網站不蒐集任何可識別個人身分的資訊。瀏覽本網站無需登入、註冊或提交個人資料。若您使用語音導覽功能，語音處理完全在您的瀏覽器本地進行，不會傳送任何資料至伺服器。',
+                'privacy-s2-title': '2. Cookie 與本地儲存',
+                'privacy-s2-body': '我們僅使用瀏覽器的 localStorage 來記住您的顯示偏好（明暗模式）。本網站不使用追蹤 Cookie 或第三方分析工具。',
+                'privacy-s3-title': '3. 第三方服務',
+                'privacy-s3-body': '本網站嵌入來自 Unsplash 及 Google Drawings 的圖片，並從 Google Fonts 載入字體。上述服務可能依其各自的隱私政策記錄您的 IP 位址。同儕評審表單由 Google Forms 託管，有關提交資料的處理方式，請參閱 Google 隱私權政策。',
+                'privacy-s4-title': '4. 學術用途',
+                'privacy-s4-body': '本網站為大學 1142 PMCS 課程的學生期末專案，僅作為學術成果展示之用，並非以商業服務形式運作。',
+                'privacy-s5-title': '5. 聯絡方式',
+                'privacy-s5-body': '若您對本隱私政策有任何疑問，歡迎透過本網站的聯絡表單與我們聯繫。',
+                'terms-title': '使用條款',
+                'terms-date': '最後更新：2026 年 5 月',
+                'terms-s1-title': '1. 條款接受',
+                'terms-s1-body': '進入本網站即表示您同意遵守本使用條款。如您不同意，請停止使用本網站。本條款適用於所有訪客與使用者。',
+                'terms-s2-title': '2. 學術用途',
+                'terms-s2-body': '本網站僅供學術與教育成果展示之用。所有內容，包括專案說明、團隊介紹及課程資料，均由 1142 PMCS 課程的學生與課程人員製作，非供商業使用。',
+                'terms-s3-title': '3. 智慧財產權',
+                'terms-s3-body': '本網站展示的所有學生作品、標誌及課程資料，均屬各自作者的智慧財產。未經事先書面同意，禁止對任何內容進行複製、散布或商業利用。',
+                'terms-s4-title': '4. 免責聲明',
+                'terms-s4-body': '本網站以「現況」提供，不附帶任何形式的保證。我們不對內容的準確性、完整性或可用性作出任何保證。連結至外部學生網站的連結由各組團隊自行維護，可能隨時變更或失效。',
+                'terms-s5-title': '5. 條款變更',
+                'terms-s5-body': '我們保留隨時更新本條款的權利。在條款更新後繼續使用本網站，即視為您接受修訂後的條款。',
+                'contact-title': '聯絡我們',
+                'contact-ta-label': '課程助教',
+                'contact-ta1-name': '助教 莊詠捷 (Zoe)',
+                'contact-ta2-name': '助教 王毓翰 (Jeremy)',
+                'contact-form-label': '傳送訊息',
+                'contact-placeholder-name': '您的姓名',
+                'contact-placeholder-email': '您的電子郵件',
+                'contact-placeholder-msg': '您的訊息',
+                'contact-send': '傳送訊息',
+                'contact-success-title': '訊息已送出！',
+                'contact-success-desc': '感謝您的聯繫，我們將盡快回覆您。',
+                'btn-preview': '預覽網站',
+                'flip-hint': '點擊翻轉以了解更多介紹',
+                'flip-back-hint': '點擊翻回',
+                'prof-back-affil': '授課教師・國立暨南國際大學國企系',
+                'prof-profile-btn': '查看教師個人頁面',
+                'intro-emi-back-short': '全英語環境，培養跨文化溝通力。',
+                'intro-ai-back-short': 'GenAI 工具融入每個學習環節。',
+                'intro-pm-back-short': '從甘特圖到市場執行的全流程訓練。',
+                'preview-no-url-title': '網站尚未提供',
+                'preview-no-url-desc': '此組的網站連結尚未新增，請稍後再試或聯繫課程團隊。'
+            },
+            'en': {
+                'app-title': '1142  PMCS',
+                'nav-label': 'Navigation',
+                'nav-home': 'Home',
+                'nav-intro': 'Course Intro',
+                'nav-team': 'Course Team',
+                'nav-tp': 'Term Projects',
+                'nav-review': 'Peer Grading',
+                'btn-voice': 'Voice Guide',
+                'home-welcome': 'Welcome to 1142 Introduction to Project Management and Career Strategy as a Product Manager in the AI Era TP Showcase',
+                'home-desc': 'This website displays the final term projects created by students in the PMCS-EMI course. Click the top-left menu to explore our course and the outstanding works by students!',
+                'btn-start': 'Start Exploring',
+                'home-tile-intro-desc': 'Learn about course objectives and core values.',
+                'home-tile-team-desc': 'Meet the professor and teaching assistants.',
+                'home-tile-tp-desc': 'Explore the final term projects by students.',
+                'home-tile-review-desc': 'Submit your peer evaluation for each group.',
+                'intro-title': 'Course Introduction',
+                'intro-subtitle': 'Cultivating Excellent Product Managers in the AI Era',
+                'intro-overview': 'This course combines AI tools with an all-English (EMI) environment to cultivate product managers with practical skills for multinational corporations. Three core pillars define the curriculum.',
+                'intro-emi-title': 'English as Medium of Instruction',
+                'intro-emi-desc': 'The entire course is conducted in English (EMI), immersing students in a professional international environment. Lectures, discussions, group presentations, and all written deliverables are completed in English — preparing students for careers in global corporations where cross-cultural communication is essential.',
+                'intro-ai-title': 'Integrating GenAI into the PM Workflow',
+                'intro-ai-desc': 'Students actively leverage GenAI tools, mind-mapping platforms (Coggle), and online learning resources (Coursera) throughout the course. The curriculum emphasises Problem-Based Learning (PBL) and Self-Directed Learning (SDL), guiding students to use AI as a practical co-pilot for research, ideation, and strategic decision-making.',
+                'intro-pm-title': 'From Strategy to Execution',
+                'intro-pm-desc': 'Students learn to integrate project management tools — including Gantt charts, supply chain analysis, and channel strategy — to bring a product idea from concept to market. Through collaborative term projects, they develop career strategy thinking, cross-departmental coordination skills, and the ability to translate business goals into actionable product roadmaps.',
+                'review-title': 'Peer Grading',
+                'review-banner-title': 'Group Peer Evaluation Form',
+                'review-banner-sub': 'Please complete the form for each group you reviewed. Your feedback is anonymous.',
+                'review-pending-title': 'Form URL Coming Soon',
+                'review-pending-desc': 'The peer grading form will be embedded here once the link is available. Please check back later.',
+                'review-open-btn': 'Open Form',
+                'review-ready-title': 'Peer Grading Form is Ready',
+                'review-ready-desc': 'Click the button below to open the form in a new tab. Please complete one submission per group you evaluated.',
+                'review-anon-note': '🔒 Your responses are anonymous and for academic use only.',
+                'tag-emi': 'EMI',
+                'tag-ai': 'AI Practice',
+                'tag-pm': 'Project Management',
+                'team-title': 'Course Team',
+                'prof-name': 'Prof. Shihmin Lo',
+                'prof-role': 'Instructor',
+                'prof-desc': 'Specialises in platform strategy, entrepreneurship, and leadership. Conducts EMI courses preparing students for global PM careers.',
+                'ta1-name': 'TA Jeremy Wang',
+                'ta-role': 'Teaching Assistant',
+                'ta1-desc': '1. Former President of College of Management Student<br> 2. Association Teaching Assistant for Prof. Shih-Min Lo (English-taught PM & Strategy courses)<br> 3.Farmer at Nanping Mountain Organic Farm－Internship<br>4. Be going to study in France~',
+                'ta2-name': 'TA Zoe Chuang',
+                'ta2-desc': 'I am a second-year student in the Institute of Management Sciences (IPCM). This semester, I am responsible for assisting classmates with classroom problems. I do not want to go into too much detail, but you can be my friend and I will  tell you more.  ',
+                'tp-title': 'Term Projects',
+                'proj1-title': 'Group 1 — EcoShop E-Commerce',
+                'proj1-desc': 'An e-commerce simulation focused on eco-friendly products. Implemented dynamic product filtering, cart, and RWD checkout forms.',
+                'proj2-title': 'Group 2 — MedFirst Healthcare',
+                'proj2-desc': 'Allows users to input data via forms to instantly generate a beautiful, RWD personal portfolio. Uses highly modular CSS.',
+                'proj3-title': 'Group 3 — WebArcade',
+                'proj3-desc': 'A classic mini-game collection built with vanilla JS (Snake, Breakout), showcasing strong DOM manipulation and animation skills.',
+                'proj4-title': 'Group 4 — H&M',
+                'proj4-desc': 'H&M is breaking down the excessive privileges of the fashion industry. Offering the most affordable prices, it makes the latest trends accessible to you every day. ',
+                'btn-view': 'View Website',
+                'footer-copyright': '© 2026 PMCS TP Final.',
+                'footer-prof': 'Instructor: Prof. Shihmin Lo',
+                'footer-disclaimer': 'For academic purposes only.',
+                'footer-privacy': 'Privacy',
+                'footer-terms': 'Terms',
+                'footer-contact': 'Contact',
+                'privacy-title': 'Privacy Policy',
+                'privacy-date': 'Last updated: May 2026',
+                'privacy-s1-title': '1. Information We Collect',
+                'privacy-s1-body': 'This website does not collect any personally identifiable information. No login, registration, or personal data submission is required to browse this site. If you use the Voice Guide feature, audio processing occurs entirely within your browser and no data is transmitted to any server.',
+                'privacy-s2-title': '2. Cookies & Local Storage',
+                'privacy-s2-body': 'We use browser localStorage solely to remember your display preferences (light/dark theme). No tracking cookies or third-party analytics are used on this site.',
+                'privacy-s3-title': '3. Third-Party Services',
+                'privacy-s3-body': 'This site embeds images from Unsplash and Google Drawings, and loads fonts from Google Fonts. These services may log your IP address per their own privacy policies. The Peer Grading form is hosted by Google Forms — please refer to Google\'s Privacy Policy for details on how submitted data is handled.',
+                'privacy-s4-title': '4. Academic Use',
+                'privacy-s4-body': 'This website is created as a student term project for the 1142  Introduction to Project Management and Career Strategy as a Product Manager in the AI Era course at a university. It is intended solely for academic demonstration purposes and is not operated as a commercial service.',
+                'privacy-s5-title': '5. Contact',
+                'privacy-s5-body': 'If you have any questions about this privacy policy, please reach out via the Contact form on this website.',
+                'terms-title': 'Terms of Use',
+                'terms-date': 'Last updated: May 2026',
+                'terms-s1-title': '1. Acceptance of Terms',
+                'terms-s1-body': 'By accessing this website, you agree to be bound by these Terms of Use. If you do not agree, please discontinue use of this site. These terms apply to all visitors and users of the 1142 PMCS Term Project Showcase.',
+                'terms-s2-title': '2. Academic Purpose',
+                'terms-s2-body': 'This website is published exclusively for academic and educational demonstration. All content — including project descriptions, team profiles, and course materials — is produced by students and course staff of the 1142 PMCS course. It is not intended for commercial use.',
+                'terms-s3-title': '3. Intellectual Property',
+                'terms-s3-body': 'All student project works, logos, and course materials displayed on this site are the intellectual property of their respective authors. Reproduction, distribution, or commercial use of any content without prior written consent is prohibited.',
+                'terms-s4-title': '4. Disclaimer of Warranties',
+                'terms-s4-body': 'This site is provided "as is" without warranties of any kind. We make no guarantees regarding the accuracy, completeness, or availability of the content. Project links to external student websites are maintained by the respective teams and may change or become unavailable.',
+                'terms-s5-title': '5. Modifications',
+                'terms-s5-body': 'We reserve the right to update these terms at any time. Continued use of the site following any changes constitutes your acceptance of the revised terms.',
+                'contact-title': 'Contact Us',
+                'contact-ta-label': 'Teaching Assistants',
+                'contact-ta1-name': 'TA Zoe Chuang',
+                'contact-ta2-name': 'TA Jeremy Wang',
+                'contact-form-label': 'Send a Message',
+                'contact-placeholder-name': 'Your Name',
+                'contact-placeholder-email': 'Your Email',
+                'contact-placeholder-msg': 'Your Message',
+                'contact-send': 'Send Message',
+                'contact-success-title': 'Message Sent!',
+                'contact-success-desc': 'Thank you for reaching out. We\'ll get back to you as soon as possible.',
+                'btn-preview': 'Preview',
+                'flip-hint': 'Click to learn more',
+                'flip-back-hint': 'Click to flip back',
+                'prof-back-affil': 'Instructor · IBS, NCNU',
+                'prof-profile-btn': 'View Faculty Profile',
+                'intro-emi-back-short': 'All instruction in English for global readiness.',
+                'intro-ai-back-short': 'GenAI tools integrated in every step.',
+                'intro-pm-back-short': 'From Gantt charts to market execution.',
+                'preview-no-url-title': 'Website URL Not Available',
+                'preview-no-url-desc': 'This group\'s website URL hasn\'t been added yet. Check back later or contact the course team.'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateLanguageDisplay();
+            document.getElementById('lang-label').textContent = currentLang === 'zh' ? 'EN' : '中文';
+            window.speechSynthesis.cancel();
+        }
+
+        function updateLanguageDisplay() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nDict[currentLang][key] !== undefined) {
+                    el.innerHTML = i18nDict[currentLang][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18nDict[currentLang][key] !== undefined) {
+                    el.placeholder = i18nDict[currentLang][key];
+                }
+            });
+        }
+
+        // Initialize language display (English by default)
+        updateLanguageDisplay();
+        document.getElementById('lang-label').textContent = '中文';
+
+        // ── Dark Mode ──
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('icon-sun').classList.toggle('hidden', !isDark);
+            document.getElementById('icon-moon').classList.toggle('hidden', isDark);
+        }
+
+        // On load, apply saved theme
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark');
+            document.getElementById('icon-sun').classList.remove('hidden');
+            document.getElementById('icon-moon').classList.add('hidden');
+        }
+
+        // ── Peer Grading Form URL ──
+        // ➜ Paste the Google Form (or any form) URL here when ready:
+        const REVIEW_FORM_URL = 'https://forms.gle/4DtuPfTcVbCKz3yV6';
+
+        (function initReviewForm() {
+            if (!REVIEW_FORM_URL) return;
+            const wrap = document.getElementById('review-iframe-wrap');
+            wrap.innerHTML = `
+                <svg style="width:56px;height:56px;color:#0070f2;opacity:0.25;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <p class="font-display font-semibold text-base" style="color:var(--text-primary);margin-top:12px;" data-i18n="review-ready-title">Peer Grading Form is Ready</p>
+                <p class="text-sm muted-text max-w-xs text-center" style="margin-bottom:8px;" data-i18n="review-ready-desc">Click the button below to open the form in a new tab. Please complete one submission per group you evaluated.</p>
+                <a href="${REVIEW_FORM_URL}" target="_blank" rel="noopener" class="btn-accent px-8 py-2.5 rounded-md text-sm font-semibold flex items-center gap-2" style="margin-top:8px;text-decoration:none;">
+                    <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    <span data-i18n="review-open-btn">Open Form</span>
+                </a>
+                <p class="text-xs muted-text" style="margin-top:16px;" data-i18n="review-anon-note">&#128274; Your responses are anonymous and for academic use only.</p>
+            `;
+            // Re-run i18n so new elements pick up current language
+            updateLanguageDisplay();
+        })();
+
+        function openReviewForm() {
+            if (REVIEW_FORM_URL) window.open(REVIEW_FORM_URL, '_blank');
+        }
+
+// ── Voice Guide ──
+        function toggleVoiceGuide() {
+            const synth = window.speechSynthesis;
+            if (synth.speaking) { synth.cancel(); return; }
+            const dict = i18nDict[currentLang];
+            const clean = s => (s || '').replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            let parts = [];
+            switch (currentActivePage) {
+                case 'home':
+                    parts = [
+                        clean(dict['home-welcome']),
+                        clean(dict['home-desc']),
+                        dict['home-tile-intro-desc'],
+                        dict['home-tile-team-desc'],
+                        dict['home-tile-tp-desc'],
+                        dict['home-tile-review-desc']
+                    ];
+                    break;
+                case 'intro':
+                    parts = [
+                        dict['intro-title'],
+                        dict['intro-subtitle'],
+                        clean(dict['intro-overview']),
+                        dict['intro-emi-title'] + '. ' + dict['intro-emi-desc'],
+                        dict['intro-ai-title'] + '. ' + dict['intro-ai-desc'],
+                        dict['intro-pm-title'] + '. ' + dict['intro-pm-desc']
+                    ];
+                    break;
+                case 'team':
+                    parts = [
+                        dict['team-title'],
+                        dict['prof-name'] + ', ' + dict['prof-role'] + '. ' + clean(dict['prof-desc']),
+                        dict['ta1-name'] + ', ' + dict['ta-role'] + '. ' + clean(dict['ta1-desc']),
+                        dict['ta2-name'] + ', ' + dict['ta-role'] + '. ' + clean(dict['ta2-desc'])
+                    ];
+                    break;
+                case 'projects':
+                    parts = [
+                        dict['tp-title'],
+                        dict['proj1-title'] + '. ' + dict['proj1-desc'],
+                        dict['proj2-title'] + '. ' + dict['proj2-desc'],
+                        dict['proj3-title'] + '. ' + dict['proj3-desc'],
+                        dict['proj4-title'] + '. ' + dict['proj4-desc']
+                    ];
+                    break;
+                case 'review':
+                    parts = [
+                        dict['review-title'],
+                        dict['review-banner-title'] + '. ' + dict['review-banner-sub'],
+                        dict['review-ready-desc']
+                    ];
+                    break;
+            }
+            const text = parts.filter(Boolean).join('. ');
+            if (text) {
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = currentLang === 'zh' ? 'zh-TW' : 'en-US';
+                u.rate = 0.9;
+                synth.speak(u);
+            }
+        }
+    </script>
+    <!-- ══════════════ BRIGHTNESS CONTROL ══════════════ -->
+    <div id="brightness-panel">
+        <div id="brightness-widget">
+            <label>Brightness <span id="brightness-val">100%</span></label>
+            <input type="range" id="brightness-slider" min="20" max="150" value="100" step="1">
+            <button id="brightness-reset">Reset to default</button>
+        </div>
+        <button id="brightness-toggle" title="Adjust Brightness" aria-label="Adjust Brightness">
+            <!-- Sun/brightness icon -->
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        (function() {
+            var slider = document.getElementById('brightness-slider');
+            var valLabel = document.getElementById('brightness-val');
+            var toggle = document.getElementById('brightness-toggle');
+            var widget = document.getElementById('brightness-widget');
+            var resetBtn = document.getElementById('brightness-reset');
+            // Target the three layout regions but NOT html/body, to avoid
+            // creating a stacking context that breaks position:fixed modals
+            var targets = [
+                document.getElementById('app-header'),
+                document.getElementById('app-main'),
+                document.getElementById('app-footer')
+            ];
+
+            function applyBrightness(val) {
+                var filterVal = val == 100 ? '' : 'brightness(' + (val / 100) + ')';
+                targets.forEach(function(el) { if (el) el.style.filter = filterVal; });
+                // Panel corrects itself so it always looks normal
+                var panel = document.getElementById('brightness-panel');
+                panel.style.filter = val == 100 ? '' : 'brightness(' + (100 / val).toFixed(4) + ')';
+                valLabel.textContent = val + '%';
+                var min = +slider.min, max = +slider.max;
+                var pct = ((val - min) / (max - min) * 100).toFixed(1) + '%';
+                slider.style.setProperty('--pct', pct);
+            }
+
+            slider.addEventListener('input', function() {
+                applyBrightness(+this.value);
+            });
+
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                widget.classList.toggle('open');
+            });
+
+            resetBtn.addEventListener('click', function() {
+                slider.value = 100;
+                applyBrightness(100);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!document.getElementById('brightness-panel').contains(e.target)) {
+                    widget.classList.remove('open');
+                }
+            });
+
+            // Init track fill
+            applyBrightness(100);
+        })();
+    </script>
+
+    <!-- ══════════════ COPY PROTECTION ══════════════ -->
+    <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+        // Disable common keyboard shortcuts for viewing/copying source
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + U (view source), Ctrl/Cmd + S (save), Ctrl/Cmd + A (select all)
+            // Ctrl/Cmd + C (copy), Ctrl/Cmd + P (print), F12 (DevTools)
+            if (
+                e.keyCode === 123 || // F12
+                (e.ctrlKey && ['u','s','a','c','p'].includes(e.key.toLowerCase())) ||
+                (e.metaKey && ['u','s','a','c','p'].includes(e.key.toLowerCase())) ||
+                (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) ||
+                (e.metaKey && e.altKey && ['i','j','u'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable text selection via CSS
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+        document.body.style.msUserSelect = 'none';
+
+        // Disable drag
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+        // Disable print
+        window.addEventListener('beforeprint', function(e) { e.stopImmediatePropagation(); });
+        if (window.matchMedia) {
+            window.matchMedia('print').addListener(function(mq) {
+                if (mq.matches) document.body.style.display = 'none';
+                else document.body.style.display = '';
+            });
+        }
+    </script>
+</body>
+</html>
